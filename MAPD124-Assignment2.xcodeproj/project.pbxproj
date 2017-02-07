@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D56460F1E4A53D7005477DA /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D56460E1E4A53D7005477DA /* EditViewController.swift */; };
 		2D9F2F871E417A1800812272 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F2F861E417A1800812272 /* AppDelegate.swift */; };
 		2D9F2F891E417A1800812272 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F2F881E417A1800812272 /* ViewController.swift */; };
 		2D9F2F8C1E417A1800812272 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D9F2F8A1E417A1800812272 /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D56460E1E4A53D7005477DA /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		2D9F2F831E417A1800812272 /* MAPD124-Assignment2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MAPD124-Assignment2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D9F2F861E417A1800812272 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2D9F2F881E417A1800812272 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +39,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D56460D1E4A51FA005477DA /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				2D9F2F861E417A1800812272 /* AppDelegate.swift */,
+				2D9F2F8D1E417A1800812272 /* Assets.xcassets */,
+				2D9F2F8F1E417A1800812272 /* LaunchScreen.storyboard */,
+				2D9F2F921E417A1800812272 /* Info.plist */,
+			);
+			name = Support;
+			sourceTree = "<group>";
+		};
 		2D9F2F7A1E417A1800812272 = {
 			isa = PBXGroup;
 			children = (
@@ -56,13 +69,11 @@
 		2D9F2F851E417A1800812272 /* MAPD124-Assignment2 */ = {
 			isa = PBXGroup;
 			children = (
-				2D9F2F861E417A1800812272 /* AppDelegate.swift */,
 				2D9F2F881E417A1800812272 /* ViewController.swift */,
+				2D56460E1E4A53D7005477DA /* EditViewController.swift */,
 				2D9F2F981E4181ED00812272 /* TodoTableViewCell.swift */,
 				2D9F2F8A1E417A1800812272 /* Main.storyboard */,
-				2D9F2F8D1E417A1800812272 /* Assets.xcassets */,
-				2D9F2F8F1E417A1800812272 /* LaunchScreen.storyboard */,
-				2D9F2F921E417A1800812272 /* Info.plist */,
+				2D56460D1E4A51FA005477DA /* Support */,
 			);
 			path = "MAPD124-Assignment2";
 			sourceTree = "<group>";
@@ -140,6 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D56460F1E4A53D7005477DA /* EditViewController.swift in Sources */,
 				2D9F2F991E4181ED00812272 /* TodoTableViewCell.swift in Sources */,
 				2D9F2F891E417A1800812272 /* ViewController.swift in Sources */,
 				2D9F2F871E417A1800812272 /* AppDelegate.swift in Sources */,
@@ -306,6 +318,7 @@
 				2D9F2F971E417A1800812272 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
