@@ -8,16 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		2D56460F1E4A53D7005477DA /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D56460E1E4A53D7005477DA /* EditViewController.swift */; };
+		2D5646111E4A5830005477DA /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5646101E4A5830005477DA /* Task.swift */; };
 		2D9F2F871E417A1800812272 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F2F861E417A1800812272 /* AppDelegate.swift */; };
 		2D9F2F891E417A1800812272 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F2F881E417A1800812272 /* ViewController.swift */; };
 		2D9F2F8C1E417A1800812272 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D9F2F8A1E417A1800812272 /* Main.storyboard */; };
 		2D9F2F8E1E417A1800812272 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D9F2F8D1E417A1800812272 /* Assets.xcassets */; };
 		2D9F2F911E417A1800812272 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D9F2F8F1E417A1800812272 /* LaunchScreen.storyboard */; };
-		2D9F2F991E4181ED00812272 /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F2F981E4181ED00812272 /* TodoTableViewCell.swift */; };
+		2D9F2F991E4181ED00812272 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F2F981E4181ED00812272 /* TaskTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2D56460E1E4A53D7005477DA /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		2D5646101E4A5830005477DA /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		2D9F2F831E417A1800812272 /* MAPD124-Assignment2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MAPD124-Assignment2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D9F2F861E417A1800812272 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2D9F2F881E417A1800812272 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -25,7 +27,7 @@
 		2D9F2F8D1E417A1800812272 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D9F2F901E417A1800812272 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2D9F2F921E417A1800812272 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2D9F2F981E4181ED00812272 /* TodoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
+		2D9F2F981E4181ED00812272 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +73,8 @@
 			children = (
 				2D9F2F881E417A1800812272 /* ViewController.swift */,
 				2D56460E1E4A53D7005477DA /* EditViewController.swift */,
-				2D9F2F981E4181ED00812272 /* TodoTableViewCell.swift */,
+				2D5646101E4A5830005477DA /* Task.swift */,
+				2D9F2F981E4181ED00812272 /* TaskTableViewCell.swift */,
 				2D9F2F8A1E417A1800812272 /* Main.storyboard */,
 				2D56460D1E4A51FA005477DA /* Support */,
 			);
@@ -152,7 +155,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D56460F1E4A53D7005477DA /* EditViewController.swift in Sources */,
-				2D9F2F991E4181ED00812272 /* TodoTableViewCell.swift in Sources */,
+				2D9F2F991E4181ED00812272 /* TaskTableViewCell.swift in Sources */,
+				2D5646111E4A5830005477DA /* Task.swift in Sources */,
 				2D9F2F891E417A1800812272 /* ViewController.swift in Sources */,
 				2D9F2F871E417A1800812272 /* AppDelegate.swift in Sources */,
 			);

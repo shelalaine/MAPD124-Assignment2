@@ -8,9 +8,19 @@
 
 import UIKit
 
+
 class EditViewController: UIViewController {
     
+    private var titles: Dictionary<String, String> = [
+        "EditSegue": "Edit Task",
+        "AddSegue": "Add Task"
+    ]
+    
+    @IBOutlet weak var taskNameTextField: UITextField!
+    
+    
     var task: String?
+    var titleLabel: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +29,8 @@ class EditViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        self.title = task
+        self.title = titles[titleLabel!]
+        taskNameTextField.text = task
     }
     
     

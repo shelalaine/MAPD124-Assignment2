@@ -8,14 +8,14 @@
 
 import UIKit
 
-class TodoTableViewCell: UITableViewCell {
+class TaskTableViewCell: UITableViewCell {
     
     @IBOutlet weak var taskLabel: UILabel!
+    @IBOutlet weak var subTaskLabel: UILabel!
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var completedSwitch: UISwitch!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
