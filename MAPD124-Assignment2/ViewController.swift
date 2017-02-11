@@ -8,32 +8,37 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDataSource, EditViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    var taskIndex: Int?
     
     var tasks = [Task]() {
         didSet {
             tableView.reloadData()
         }
     }
-    let data: [String] = ["Task 1", "Task 2", "Task 3"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // Setup the predefined tasks
+        tasks.append(Task(name: "Do Web App Assignment", "", true))
+        tasks.append(Task(name: "Do Assignment 2", "", true))
+        tasks.append(Task(name: "Prepare for the Emerging Tech presentation", "", false))
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Rows", for: indexPath) as! TaskTableViewCell
-        cell.taskLabel.text = data[indexPath.row]
+        cell.taskLabel.text = tasks[indexPath.row].name
+        cell.completedSwitch.setOn(tasks[indexPath.row].onGoing, animated: false)
         cell.editButton.tag = indexPath.row
         return cell;
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return tasks.count
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -52,19 +57,34 @@ class ViewController: UIViewController, UITableViewDataSource {
                 // Pass the identifier
                 segueToEdit.titleLabel = identifier
                 
+                // Assign self to the EditViewController delegate
+                segueToEdit.delegate = self
+                
                 // Pass the reference to the new Task object
                 switch identifier {
                 case "AddSegue":
-                    segueToEdit.task = "New Task"
+                    tasks.append(Task(name:"", "", true))
+                    segueToEdit.task = tasks[tasks.count - 1]
+                    // Save the index of the current Task
+                    taskIndex = tasks.count - 1
                 case "EditSegue":
                     if let cell = sender as? UIButton {
-                        segueToEdit.task = data[cell.tag]
+                        segueToEdit.task = tasks[cell.tag]
+                        // Save the index of the current Task
+                        taskIndex = cell.tag
                     }
                 default:
                     break
                 }
+                
+
             }
         }
+    }
+    
+    func saveItem(controller: EditViewController, _ task: Task) {
+        tasks[taskIndex!] = task
+        print("\(tasks[taskIndex!].name) ")
     }
 }
 

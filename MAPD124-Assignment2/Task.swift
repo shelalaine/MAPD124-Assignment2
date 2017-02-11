@@ -11,11 +11,11 @@ import Foundation
 class Task {
     var name: String
     var notes: String
-    var completed: Bool
+    var onGoing: Bool
     
-    init(name: String, _ notes: String, _ completed: Bool) {
+    init(name: String, _ notes: String, _ onGoing: Bool) {
         self.name = name
         self.notes = notes
-        self.completed = completed
+        self.onGoing = onGoing
     }
 }
