@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2D56460F1E4A53D7005477DA /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D56460E1E4A53D7005477DA /* EditViewController.swift */; };
 		2D5646111E4A5830005477DA /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5646101E4A5830005477DA /* Task.swift */; };
+		2D947B071E5428F500EB27B5 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D43F0221E541DCA00C70B64 /* libsqlite3.tbd */; settings = {ATTRIBUTES = (Required, ); }; };
 		2D9F2F871E417A1800812272 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F2F861E417A1800812272 /* AppDelegate.swift */; };
 		2D9F2F891E417A1800812272 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F2F881E417A1800812272 /* ViewController.swift */; };
 		2D9F2F8C1E417A1800812272 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D9F2F8A1E417A1800812272 /* Main.storyboard */; };
@@ -18,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D43F0221E541DCA00C70B64 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		2D43F0251E54256D00C70B64 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		2D56460E1E4A53D7005477DA /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		2D5646101E4A5830005477DA /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		2D9F2F831E417A1800812272 /* MAPD124-Assignment2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MAPD124-Assignment2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -35,12 +38,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D947B071E5428F500EB27B5 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D43F0211E541DCA00C70B64 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2D43F0221E541DCA00C70B64 /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2D56460D1E4A51FA005477DA /* Support */ = {
 			isa = PBXGroup;
 			children = (
@@ -57,6 +69,7 @@
 			children = (
 				2D9F2F851E417A1800812272 /* MAPD124-Assignment2 */,
 				2D9F2F841E417A1800812272 /* Products */,
+				2D43F0211E541DCA00C70B64 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -75,6 +88,7 @@
 				2D56460E1E4A53D7005477DA /* EditViewController.swift */,
 				2D5646101E4A5830005477DA /* Task.swift */,
 				2D9F2F981E4181ED00812272 /* TaskTableViewCell.swift */,
+				2D43F0251E54256D00C70B64 /* Bridging-Header.h */,
 				2D9F2F8A1E417A1800812272 /* Main.storyboard */,
 				2D56460D1E4A51FA005477DA /* Support */,
 			);
@@ -286,6 +300,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.shelalainechan.MAPD124-Assignment2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MAPD124-Assignment2/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -299,6 +314,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.shelalainechan.MAPD124-Assignment2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MAPD124-Assignment2/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

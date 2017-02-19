@@ -13,7 +13,7 @@ protocol EditViewControllerDelegate  {
 }
 
 
-class EditViewController: UIViewController, UITextFieldDelegate {
+class EditViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
     private var titles: Dictionary<String, String> = [
         "EditSegue": "Edit Task",
@@ -21,6 +21,7 @@ class EditViewController: UIViewController, UITextFieldDelegate {
     ]
     
     @IBOutlet weak var taskNameTextField: UITextField!
+    @IBOutlet weak var taskNoteTextView: UITextView!
     
     
     var task: Task?
@@ -30,25 +31,38 @@ class EditViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.taskNameTextField.delegate = self
+        self.taskNoteTextView.delegate = self
+        taskNameTextField.becomeFirstResponder()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         self.title = titles[titleLabel!]
         taskNameTextField.text = task?.name
+        taskNoteTextView.text = task?.notes
     }
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        print("Should begin editing")
-        return true
+    override func viewWillDisappear(_ animated: Bool) {
+        delegate?.saveItem(controller: self, task!)
     }
     
+  
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let taskName = textField.text {
-            task?.name = taskName
-            delegate?.saveItem(controller: self, task!)
-        }
         taskNameTextField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let taskName = textField.text {
+            task?.name = taskName
+        }
+    }
+    
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if let taskNote = textView.text {
+            task?.notes = taskNote
+        }
+        taskNoteTextView.resignFirstResponder()
     }
     
 }
