@@ -123,6 +123,11 @@ class ViewController: UIViewController, UITableViewDataSource, SettingCellDelega
         print("\(tasks[taskIndex!].name) ")
     }
     
+    func deleteItem(controller: EditViewController, _ task: Task) {
+        deleteTaskFromDB(index: task.id!)
+        tasks.remove(at: taskIndex!)
+    }
+    
     func didChangeSwitchState(sender: TaskTableViewCell, isOn: Bool) {
         if let indexPath = self.table.indexPath(for: sender) {
             tasks[indexPath.row].onGoing = isOn
@@ -268,6 +273,8 @@ class ViewController: UIViewController, UITableViewDataSource, SettingCellDelega
             if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
                 if sqlite3_step(statement) == SQLITE_DONE {
                     print("Updated task, ID \(task.id!)")
+                } else {
+                    print("\(query)")
                 }
                 
                 sqlite3_finalize(statement)
