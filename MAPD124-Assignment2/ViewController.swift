@@ -56,7 +56,6 @@ class ViewController: UIViewController, UITableViewDataSource, SettingCellDelega
         updateTaskLabels(cell, indexPath.row)
         cell.completedSwitch.setOn(tasks[indexPath.row].onGoing, animated: false)
         cell.editButton.tag = indexPath.row
-
         cell.cellDelegate = self
         return cell;
     }
@@ -248,6 +247,10 @@ class ViewController: UIViewController, UITableViewDataSource, SettingCellDelega
         
         sqlite3_close(database)
     }
+    
+    // MARK: Actions
+    
+    
     
     // Update task in the SQL database
     func updateTaskInDB(task: Task) {

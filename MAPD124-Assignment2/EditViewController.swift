@@ -15,6 +15,7 @@ protocol EditViewControllerDelegate  {
 
 class EditViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
+    let NOTES_PLACEHOLDER_TEXTVIEW = "Enter note / description of the task"
     private var titles: Dictionary<String, String> = [
         "EditSegue": "Edit Task",
         "AddSegue": "Add Task"
@@ -34,14 +35,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         self.taskNoteTextView.delegate = self
         taskNameTextField.becomeFirstResponder()
         
-        // Add border to UITextView
-        let borderColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
-        self.taskNoteTextView.layer.borderWidth = 0.5
-        self.taskNoteTextView.layer.borderColor = borderColor.cgColor
-        self.taskNoteTextView.layer.cornerRadius = 5.0
-        
-        
-        
 //        let app = UIApplication.shared
 //        NotificationCenter.default.addObserver(self,
 //                                               selector: #selector(self.applicationWillResignActive(notification:)),
@@ -51,8 +44,23 @@ class EditViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
 
     override func viewWillAppear(_ animated: Bool) {
         self.title = titles[titleLabel!]
+        
+        // Add border to UITextView
+        let borderColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
+        self.taskNoteTextView.layer.borderWidth = 0.5
+        self.taskNoteTextView.layer.borderColor = borderColor.cgColor
+        self.taskNoteTextView.layer.cornerRadius = 5.0
+        
         taskNameTextField.text = task?.name
-        taskNoteTextView.text = task?.notes
+        
+        // Set the task note or the placeholder if notes is empty
+        if task?.notes != "" {
+            taskNoteTextView.text = task?.notes
+            taskNoteTextView.textColor = UIColor.black
+        } else {
+            taskNoteTextView.textColor = UIColor.lightGray
+            taskNoteTextView.text = NOTES_PLACEHOLDER_TEXTVIEW
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -71,12 +79,52 @@ class EditViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         }
     }
     
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+    
+        if textView == taskNoteTextView  && textView.text == NOTES_PLACEHOLDER_TEXTVIEW {
+            textView.selectedRange = NSMakeRange(0, 0)
+        }
+        return true
+    }
+    
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if let taskNote = textView.text {
             task?.notes = taskNote
         }
         taskNoteTextView.resignFirstResponder()
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let newLength = textView.text.utf16.count + text.utf16.count - range.length
+        print("textView count: \(textView.text.utf16.count) Text count: \(text.utf16.count) Range length: \(range.length)")
+        if newLength > 0 {
+            // Check if Notes placeholder is shown
+            if textView == taskNoteTextView  && textView.text == NOTES_PLACEHOLDER_TEXTVIEW {
+
+                taskNoteTextView.text = ""
+                taskNoteTextView.textColor = UIColor.black
+            }
+        } else {
+            taskNoteTextView.textColor = UIColor.lightGray
+            taskNoteTextView.text = NOTES_PLACEHOLDER_TEXTVIEW
+            
+            // Move cursor to start
+            textView.selectedRange = NSMakeRange(0, 0)
+        }
+        print("New length: \(newLength)")
+        return true
+    }
+    
+    
+    // MARK: Button Actions
+    @IBAction func deleteButtonHandler(_ sender: UIButton) {
+    }
+    
+    @IBAction func cancelButtonHandler(_ sender: UIButton) {
+    }
+    
+    @IBAction func updateButtonHandler(_ sender: UIButton) {
     }
     
 //    func applicationWillResignActive(notification: NSNotification) {
