@@ -9,11 +9,13 @@
 import Foundation
 
 class Task {
+    var id: Int?
     var name: String
     var notes: String
     var onGoing: Bool
     
-    init(name: String, _ notes: String, _ onGoing: Bool) {
+    init(name: String, id:Int?, _ notes: String, _ onGoing: Bool) {
+        self.id = id
         self.name = name
         self.notes = notes
         self.onGoing = onGoing

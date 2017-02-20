@@ -14,11 +14,7 @@ class ViewController: UIViewController, UITableViewDataSource, EditViewControlle
     @IBOutlet weak var addUIBarButton: UIBarButtonItem!
     var taskIndex: Int?
     
-    var tasks = [Task]() {
-        didSet {
-//            table.reloadData()
-        }
-    }
+    var tasks = [Task]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,30 +42,8 @@ class ViewController: UIViewController, UITableViewDataSource, EditViewControlle
             return
         }
         
-        let query = "SELECT ID, TASK_DATA, TASK_NOTE FROM FIELDS ORDER BY ID"
-        var statement:OpaquePointer? = nil
-        
-        if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
-            while sqlite3_step(statement) == SQLITE_ROW {
-//                let row = Int(sqlite3_column_int(statement, 0))
-                let rowData = sqlite3_column_text(statement, 1)
-                let rowNote = sqlite3_column_text(statement, 2)
-                let fieldValue = String.init(cString: rowData!)
-                let fieldNoteValue = String.init(cString: rowNote!)
-                tasks.append(Task(name: fieldValue, fieldNoteValue, true))
-            }
-            
-            sqlite3_finalize(statement)
-        }
-        
-        sqlite3_close(database)
-        
-    
-        let app = UIApplication.shared
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.applicationWillResignActive(notification:)),
-                                               name: Notification.Name.UIApplicationWillResignActive,
-                                               object: app)
+        // Read the tasks from the database
+        readTasksFromDB()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -112,10 +86,15 @@ class ViewController: UIViewController, UITableViewDataSource, EditViewControlle
                 // Pass the reference to the new Task object
                 switch identifier {
                 case "AddSegue":
-                    tasks.append(Task(name:"", "", true))
-                    segueToEdit.task = tasks[tasks.count - 1]
-                    // Save the index of the current Task
-                    taskIndex = tasks.count - 1
+                    let newTask = Task(name:"", id:nil, "", true)
+                    if let id = insertTaskToDB(task: newTask) {
+                        newTask.id = id
+                        // Append this task
+                        tasks.append(newTask)
+                        segueToEdit.task = tasks[tasks.count - 1]
+                        // Save the index of the current Task
+                        taskIndex = tasks.count - 1
+                    }
                 case "EditSegue":
                     if let cell = sender as? UIButton {
                         segueToEdit.task = tasks[cell.tag]
@@ -141,12 +120,14 @@ class ViewController: UIViewController, UITableViewDataSource, EditViewControlle
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         // Remove the task of the tableview selected
+        deleteTaskFromDB(index: tasks[indexPath.row].id!)
         tasks.remove(at: indexPath.row)
         table.deleteRows(at: [indexPath], with: .fade)
     }
     
     func saveItem(controller: EditViewController, _ task: Task) {
         tasks[taskIndex!] = task
+        updateTaskInDB(task: tasks[taskIndex!])
         print("\(tasks[taskIndex!].name) ")
     }
     
@@ -161,34 +142,118 @@ class ViewController: UIViewController, UITableViewDataSource, EditViewControlle
         return url!
     }
     
-    func applicationWillResignActive(notification: NSNotification) {
+    
+    //
+    func insertTaskToDB(task: Task) -> Int? {
+        var id: Int?
+        
         var database:OpaquePointer? = nil
         let result = sqlite3_open(dataFilePath(), &database)
         
         if result !=  SQLITE_OK {
             print("Failed to open database")
         } else {
-            for index in 0..<tasks.count {
-                let task = tasks[index]
-                let update = "INSERT OR REPLACE INTO FIELDS (ID, TASK_DATA, TASK_NOTE) " +
-                                "VALUES (?, ?, ?);"
-                var statement:OpaquePointer? = nil
+            var statement:OpaquePointer? = nil
+            let update = "INSERT OR REPLACE INTO FIELDS (TASK_DATA, TASK_NOTE) VALUES (?, ?);"
+            
+            if sqlite3_prepare_v2(database, update, -1, &statement, nil) == SQLITE_OK {
+                let taskName = task.name as NSString
+                let taskNote = task.notes as NSString
                 
-                if sqlite3_prepare_v2(database, update, -1, &statement, nil) == SQLITE_OK {
-                    sqlite3_bind_int(statement, 1, Int32(index))
-                    sqlite3_bind_text(statement, 2, task.name, -1, nil)
-                    sqlite3_bind_text(statement, 3, task.notes, -1, nil)
-                }
+                sqlite3_bind_text(statement, 1, taskName.utf8String, -1, nil)
+                sqlite3_bind_text(statement, 2, taskNote.utf8String, -1, nil)
                 
-                if sqlite3_step(statement) != SQLITE_DONE {
-                    print("Error updating table")
-                } else {
-                    sqlite3_finalize(statement)
-                }
+                print("Write: \(taskName), Note \(taskNote)")
+            }
+            
+            if sqlite3_step(statement) != SQLITE_DONE {
+                print("Error updating table")
+            } else {
+                sqlite3_finalize(statement)
+                id = Int(sqlite3_last_insert_rowid(database))
             }
         }
         sqlite3_close(database)
+        
+        return id
     }
     
+    // Read the tasks from the Task table SQL Table
+    func readTasksFromDB() {
+        var database:OpaquePointer? = nil
+        let result = sqlite3_open(dataFilePath(), &database)
+        
+        if result !=  SQLITE_OK {
+            print("Failed to open database")
+        } else {
+            let query = "SELECT * FROM FIELDS ORDER BY ID;"
+            var statement:OpaquePointer? = nil
+            
+            if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
+                while sqlite3_step(statement) == SQLITE_ROW {
+                    let row = Int(sqlite3_column_int(statement, 0))
+                    let rowData = sqlite3_column_text(statement, 1)
+                    let rowNote = sqlite3_column_text(statement, 2)
+                    let fieldValue = String.init(cString: rowData!)
+                    let fieldNoteValue = String.init(cString: rowNote!)
+                    tasks.append(Task(name: fieldValue, id:row, fieldNoteValue, true))
+                    
+                    print("Read: \(row), \(fieldValue), \(fieldNoteValue)")
+                }
+                
+                sqlite3_finalize(statement)
+            }
+        }
+        
+        sqlite3_close(database)
+    }
+    
+    // Delete task from the SQL Database
+    func deleteTaskFromDB(index: Int) {
+        var database:OpaquePointer? = nil
+        let result = sqlite3_open(dataFilePath(), &database)
+        
+        if result !=  SQLITE_OK {
+            print("Failed to open database")
+        } else {
+            let query = "DELETE FROM FIELDS WHERE ID = " + String(index) + ";"
+            var statement:OpaquePointer? = nil
+            
+            if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
+                if sqlite3_step(statement) == SQLITE_DONE {
+                    print("Deleted task, ID \(index)")
+                }
+                
+                sqlite3_finalize(statement)
+            }
+        }
+        
+        sqlite3_close(database)
+    }
+    
+    // Update task in the SQL database
+    func updateTaskInDB(task: Task) {
+        var database:OpaquePointer? = nil
+        let result = sqlite3_open(dataFilePath(), &database)
+        
+        if result !=  SQLITE_OK {
+            print("Failed to open database")
+        } else {
+            let query = "UPDATE FIELDS SET TASK_DATA = '" + task.name +
+                        "', TASK_NOTE = '" + task.notes +
+                        "' WHERE ID = " + String(task.id!) + ";"
+            var statement:OpaquePointer? = nil
+            
+            if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
+                if sqlite3_step(statement) == SQLITE_DONE {
+                    print("Updated task, ID \(task.id!)")
+                }
+                
+                sqlite3_finalize(statement)
+            }
+        }
+        
+        sqlite3_close(database)
+    }
 }
 
