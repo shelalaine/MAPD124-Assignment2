@@ -63,6 +63,9 @@
                                                             <subviews>
                                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bBG-Ww-xnZ">
                                                                     <rect key="frame" x="0.0" y="14.5" width="51" height="31"/>
+                                                                    <connections>
+                                                                        <action selector="taskSwitchHandler:" destination="EFr-sr-9Ia" eventType="valueChanged" id="4jB-oV-afZ"/>
+                                                                    </connections>
                                                                 </switch>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZEk-gd-l4S">
                                                                     <rect key="frame" x="54" y="15" width="30" height="30"/>

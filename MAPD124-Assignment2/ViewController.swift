@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, EditViewControllerDelegate {
+class ViewController: UIViewController, UITableViewDataSource, SettingCellDelegate, EditViewControllerDelegate {
     
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var addUIBarButton: UIBarButtonItem!
@@ -53,10 +53,11 @@ class ViewController: UIViewController, UITableViewDataSource, EditViewControlle
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Rows", for: indexPath) as! TaskTableViewCell
-        cell.taskLabel.text = tasks[indexPath.row].name
-        cell.subTaskLabel.text = tasks[indexPath.row].notes
+        updateTaskLabels(cell, indexPath.row)
         cell.completedSwitch.setOn(tasks[indexPath.row].onGoing, animated: false)
         cell.editButton.tag = indexPath.row
+
+        cell.cellDelegate = self
         return cell;
     }
 
@@ -66,14 +67,6 @@ class ViewController: UIViewController, UITableViewDataSource, EditViewControlle
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-//            if let cell = sender as? TaskTableViewCell {
-//                let indexPath = table.indexPath(for: cell)
-//
-//                if let segueToEdit = segue.destination as? EditViewController {
-//                    print(data[(indexPath?.row)!])
-//                    segueToEdit.task = data[(indexPath?.row)!]
-//                }
-//            }
         if let segueToEdit = segue.destination as? EditViewController {
 
             if let identifier = segue.identifier {
@@ -131,7 +124,32 @@ class ViewController: UIViewController, UITableViewDataSource, EditViewControlle
         print("\(tasks[taskIndex!].name) ")
     }
     
+    func didChangeSwitchState(sender: TaskTableViewCell, isOn: Bool) {
+        if let indexPath = self.table.indexPath(for: sender) {
+            tasks[indexPath.row].onGoing = isOn
+            updateTaskLabels(sender, indexPath.row)
+        }
+    }
     
+    private func updateTaskLabels(_ cell: TaskTableViewCell, _ row: Int) {
+
+        if tasks[row].onGoing {
+            cell.taskLabel.textColor = UIColor.black
+            cell.taskLabel.text = tasks[row].name
+            cell.subTaskLabel.text = tasks[row].notes
+            cell.editButton.isEnabled = true
+        } else {
+            let nameAttributeString = NSMutableAttributedString(string:tasks[row].name)
+            nameAttributeString.addAttribute(NSStrikethroughStyleAttributeName,
+                                         value: 2,
+                                         range: NSMakeRange(0, nameAttributeString.length))
+            cell.taskLabel.attributedText = nameAttributeString
+            cell.taskLabel.textColor = UIColor.darkGray
+            cell.subTaskLabel.text = ""
+            cell.editButton.isEnabled = false
+        }
+    }
+
     // MARK: SQLite Handlers
     
     func dataFilePath() -> String {
