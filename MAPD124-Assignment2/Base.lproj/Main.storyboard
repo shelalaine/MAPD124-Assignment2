@@ -38,16 +38,16 @@
                                                     <rect key="frame" x="8" y="8" width="398" height="60"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="N1c-SX-b0j">
-                                                            <rect key="frame" x="0.0" y="0.0" width="297" height="60"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="298" height="60"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task name goes here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sct-gY-TRl">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="297" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="298" height="20"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                                     <color key="textColor" red="0.80000001190000003" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAe-0K-a3j">
-                                                                    <rect key="frame" x="0.0" y="20" width="297" height="40"/>
+                                                                    <rect key="frame" x="0.0" y="20" width="298" height="40"/>
                                                                     <string key="text">Task notes goes here the quick brown fox jumps over the lazy dog are you okay now Shelalaine wajfkaslfkjlakjflkjlTask notes goes here the quick brown fox jumps over the lazy dog are you okay now Shelalaine wajfkaslfkjlakjflkjlTask notes goes here the quick brown fox jumps over the lazy dog are you okay now Shelalaine wajfkaslfkjlakjflkjlTask notes goes here the quick brown fox jumps over the lazy dog are you okay now Shelalaine wajfkaslfkjlakjflkjlTask notes goes here the quick brown fox jumps over the lazy dog are you okay now Shelalaine wajfkaslfkjlakjflkjlTask notes goes here the quick brown fox jumps over the lazy dog are you okay now Shelalaine wajfkaslfkjlakjflkjl</string>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                                     <color key="textColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -59,7 +59,7 @@
                                                             </constraints>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="oLl-lH-Jjp">
-                                                            <rect key="frame" x="302" y="0.0" width="96" height="60"/>
+                                                            <rect key="frame" x="303" y="0.0" width="95" height="60"/>
                                                             <subviews>
                                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bBG-Ww-xnZ">
                                                                     <rect key="frame" x="0.0" y="14.666666666666666" width="51" height="31"/>
@@ -69,8 +69,8 @@
                                                                     </connections>
                                                                 </switch>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZEk-gd-l4S">
-                                                                    <rect key="frame" x="59" y="12" width="37" height="36"/>
-                                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                                    <rect key="frame" x="59" y="12" width="36" height="36"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                                     <state key="normal" title="Edit">
                                                                         <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     </state>
@@ -191,7 +191,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0y-n3-GwR">
                                         <rect key="frame" x="0.0" y="0.0" width="111.33333333333334" height="36"/>
                                         <color key="backgroundColor" red="0.80000001190000003" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Delete">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -203,7 +203,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CAt-2K-cBW">
                                         <rect key="frame" x="131.33333333333331" y="0.0" width="111.33333333333334" height="36"/>
                                         <color key="backgroundColor" red="0.80000001190000003" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -215,7 +215,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B4I-od-hw2">
                                         <rect key="frame" x="262.66666666666674" y="0.0" width="111.33333333333331" height="36"/>
                                         <color key="backgroundColor" red="0.80000001190000003" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Update">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
