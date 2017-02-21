@@ -297,6 +297,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2BULHRS882;
 				INFOPLIST_FILE = "MAPD124-Assignment2/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.shelalainechan.MAPD124-Assignment2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -311,6 +312,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2BULHRS882;
 				INFOPLIST_FILE = "MAPD124-Assignment2/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.shelalainechan.MAPD124-Assignment2";
 				PRODUCT_NAME = "$(TARGET_NAME)";

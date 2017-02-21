@@ -1,14 +1,21 @@
 //
-//  ViewController.swift
-//  MAPD124-Assignment2
+//  File Name:      ViewController.swift
+//  Project Name:   MAPD124-Assignment2
+//  Description:    This is the main UI View Controller of all tasks
 //
-//  Created by Shelalaine Chan on 2017-01-31.
+//  Created by:     Shelalaine Chan 
+//  Student ID:     300924281
+//  Change History: 2017-01-31, Created
+//
 //  Copyright © 2017 ShelalaineChan. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, SettingCellDelegate, EditViewControllerDelegate {
+class ViewController: UIViewController,
+                        UITableViewDataSource,
+                        SettingCellDelegate,
+                        EditViewControllerDelegate {
     
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var addUIBarButton: UIBarButtonItem!
@@ -18,9 +25,6 @@ class ViewController: UIViewController, UITableViewDataSource, SettingCellDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Add an Edit button to allow deletion of cell
-//        self.navigationItem.leftBarButtonItem = editButtonItem
         
         // Open the database
         var database:OpaquePointer? = nil
@@ -33,7 +37,7 @@ class ViewController: UIViewController, UITableViewDataSource, SettingCellDelega
         
         // Create the table
         let createSQL = "CREATE TABLE IF NOT EXISTS FIELDS " +
-                        "(ID INTEGER PRIMARY KEY AUTOINCREMENT, TASK_DATA TEXT, TASK_NOTE TEXT);"
+                        "(ID INTEGER PRIMARY KEY AUTOINCREMENT, TASK_DATA TEXT, TASK_NOTE TEXT, ONGOING INT);"
         var errMsg:UnsafeMutablePointer<Int8>? = nil
 
         if (sqlite3_exec(database, createSQL, nil, nil, &errMsg) != SQLITE_OK) {
@@ -69,8 +73,6 @@ class ViewController: UIViewController, UITableViewDataSource, SettingCellDelega
         if let segueToEdit = segue.destination as? EditViewController {
 
             if let identifier = segue.identifier {
-                // Pass the identifier
-                segueToEdit.titleLabel = identifier
                 
                 // Assign self to the EditViewController delegate
                 segueToEdit.delegate = self
@@ -132,13 +134,17 @@ class ViewController: UIViewController, UITableViewDataSource, SettingCellDelega
         if let indexPath = self.table.indexPath(for: sender) {
             tasks[indexPath.row].onGoing = isOn
             updateTaskLabels(sender, indexPath.row)
+            // Update the task in the database
+            updateTaskInDB(task: tasks[indexPath.row])
         }
     }
     
     private func updateTaskLabels(_ cell: TaskTableViewCell, _ row: Int) {
+        
+//        cell.editButton.setTitleColor(UIColor.grayColor(), forState: .Disabled)
+        cell.editButton.setTitleColor(UIColor.lightGray, for: .disabled)
 
         if tasks[row].onGoing {
-            cell.taskLabel.textColor = UIColor.black
             cell.taskLabel.text = tasks[row].name
             cell.subTaskLabel.text = tasks[row].notes
             cell.editButton.isEnabled = true
@@ -148,7 +154,6 @@ class ViewController: UIViewController, UITableViewDataSource, SettingCellDelega
                                          value: 2,
                                          range: NSMakeRange(0, nameAttributeString.length))
             cell.taskLabel.attributedText = nameAttributeString
-            cell.taskLabel.textColor = UIColor.darkGray
             cell.subTaskLabel.text = ""
             cell.editButton.isEnabled = false
         }
@@ -164,43 +169,7 @@ class ViewController: UIViewController, UITableViewDataSource, SettingCellDelega
         return url!
     }
     
-    
-    //
-    func insertTaskToDB(task: Task) -> Int? {
-        var id: Int?
-        
-        var database:OpaquePointer? = nil
-        let result = sqlite3_open(dataFilePath(), &database)
-        
-        if result !=  SQLITE_OK {
-            print("Failed to open database")
-        } else {
-            var statement:OpaquePointer? = nil
-            let update = "INSERT OR REPLACE INTO FIELDS (TASK_DATA, TASK_NOTE) VALUES (?, ?);"
-            
-            if sqlite3_prepare_v2(database, update, -1, &statement, nil) == SQLITE_OK {
-                let taskName = task.name as NSString
-                let taskNote = task.notes as NSString
-                
-                sqlite3_bind_text(statement, 1, taskName.utf8String, -1, nil)
-                sqlite3_bind_text(statement, 2, taskNote.utf8String, -1, nil)
-                
-                print("Write: \(taskName), Note \(taskNote)")
-            }
-            
-            if sqlite3_step(statement) != SQLITE_DONE {
-                print("Error updating table")
-            } else {
-                sqlite3_finalize(statement)
-                id = Int(sqlite3_last_insert_rowid(database))
-            }
-        }
-        sqlite3_close(database)
-        
-        return id
-    }
-    
-    // Read the tasks from the Task table SQL Table
+    // Read tasks from the database
     func readTasksFromDB() {
         var database:OpaquePointer? = nil
         let result = sqlite3_open(dataFilePath(), &database)
@@ -216,9 +185,14 @@ class ViewController: UIViewController, UITableViewDataSource, SettingCellDelega
                     let row = Int(sqlite3_column_int(statement, 0))
                     let rowData = sqlite3_column_text(statement, 1)
                     let rowNote = sqlite3_column_text(statement, 2)
+                    let rowOngoing = Int(sqlite3_column_int(statement, 3))
                     let fieldValue = String.init(cString: rowData!)
                     let fieldNoteValue = String.init(cString: rowNote!)
-                    tasks.append(Task(name: fieldValue, id:row, fieldNoteValue, true))
+                    let onGoingValue = rowOngoing == 1 ? true : false
+                    tasks.append(Task(name: fieldValue,
+                                      id:row,
+                                      fieldNoteValue,
+                                      onGoingValue))
                     
                     print("Read: \(row), \(fieldValue), \(fieldNoteValue)")
                 }
@@ -230,6 +204,43 @@ class ViewController: UIViewController, UITableViewDataSource, SettingCellDelega
         sqlite3_close(database)
     }
     
+    // Insert task to the database
+    func insertTaskToDB(task: Task) -> Int? {
+        var id: Int?
+        
+        var database:OpaquePointer? = nil
+        let result = sqlite3_open(dataFilePath(), &database)
+        
+        if result !=  SQLITE_OK {
+            print("Failed to open database")
+        } else {
+            var statement:OpaquePointer? = nil
+            let update = "INSERT INTO FIELDS (TASK_DATA, TASK_NOTE, ONGOING) VALUES (?, ?, ?);"
+            
+            if sqlite3_prepare_v2(database, update, -1, &statement, nil) == SQLITE_OK {
+                let taskName = task.name as NSString
+                let taskNote = task.notes as NSString
+                let onGoing = task.onGoing ? 1 : 0
+                
+                sqlite3_bind_text(statement, 1, taskName.utf8String, -1, nil)
+                sqlite3_bind_text(statement, 2, taskNote.utf8String, -1, nil)
+                sqlite3_bind_int(statement, 3, Int32(onGoing))
+                
+                print("Write: \(taskName), Note \(taskNote)")
+            }
+            
+            if sqlite3_step(statement) != SQLITE_DONE {
+                print("Error updating table")
+            } else {
+                sqlite3_finalize(statement)
+                id = Int(sqlite3_last_insert_rowid(database))
+            }
+        }
+        sqlite3_close(database)
+        
+        return id
+    }
+  
     // Delete task from the SQL Database
     func deleteTaskFromDB(index: Int) {
         var database:OpaquePointer? = nil
@@ -253,30 +264,33 @@ class ViewController: UIViewController, UITableViewDataSource, SettingCellDelega
         sqlite3_close(database)
     }
     
-    // MARK: Actions
-    
-    
-    
     // Update task in the SQL database
     func updateTaskInDB(task: Task) {
+
         var database:OpaquePointer? = nil
         let result = sqlite3_open(dataFilePath(), &database)
         
         if result !=  SQLITE_OK {
             print("Failed to open database")
         } else {
-            let query = "UPDATE FIELDS SET TASK_DATA = '" + task.name +
-                        "', TASK_NOTE = '" + task.notes +
-                        "' WHERE ID = " + String(task.id!) + ";"
             var statement:OpaquePointer? = nil
+            let update = "INSERT OR REPLACE INTO FIELDS (ID, TASK_DATA, TASK_NOTE, ONGOING) VALUES (?, ?, ?, ?);"
             
-            if sqlite3_prepare_v2(database, query, -1, &statement, nil) == SQLITE_OK {
-                if sqlite3_step(statement) == SQLITE_DONE {
-                    print("Updated task, ID \(task.id!)")
-                } else {
-                    print("\(query)")
-                }
-                
+            if sqlite3_prepare_v2(database, update, -1, &statement, nil) == SQLITE_OK {
+                let taskName = task.name as NSString
+                let taskNote = task.notes as NSString
+                let onGoing = task.onGoing ? 1 : 0
+  
+                sqlite3_bind_int(statement, 1, Int32(task.id!))
+                sqlite3_bind_text(statement, 2, taskName.utf8String, -1, nil)
+                sqlite3_bind_text(statement, 3, taskNote.utf8String, -1, nil)
+                sqlite3_bind_int(statement, 4, Int32(onGoing))
+            }
+            
+            if sqlite3_step(statement) != SQLITE_DONE {
+                print("Error updating table")
+            } else {
+                print("Updated \(task.id!)")
                 sqlite3_finalize(statement)
             }
         }

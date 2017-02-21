@@ -1,8 +1,12 @@
 //
-//  Task.swift
-//  MAPD124-Assignment2
+//  File Name:      Task.swift
+//  Project Name:   MAPD124-Assignment2
+//  Description:    This is the Task class
 //
-//  Created by Shelalaine Chan on 2017-02-07.
+//  Created by:     Shelalaine Chan
+//  Student ID:     300924281
+//  Change History: 2017-02-07, Created
+//
 //  Copyright © 2017 ShelalaineChan. All rights reserved.
 //
 

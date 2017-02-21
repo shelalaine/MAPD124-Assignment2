@@ -1,8 +1,12 @@
 //
-//  TodoTableViewCell.swift
-//  MAPD124-Assignment2
+//  File Name:      TodoTableViewCell.swift
+//  Project Name:   MAPD124-Assignment2
+//  Description:    This is the custom UI Table View Cell of the task table
 //
-//  Created by Shelalaine Chan on 2017-01-31.
+//  Created by:     Shelalaine Chan
+//  Student ID:     300924281
+//  Change History: 2017-01-31, Created
+//
 //  Copyright © 2017 ShelalaineChan. All rights reserved.
 //
 

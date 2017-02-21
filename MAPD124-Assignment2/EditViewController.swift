@@ -1,8 +1,13 @@
 //
-//  EditViewController.swift
-//  MAPD124-Assignment2
+//  File Name:      EditViewController.swift
+//  Project Name:   MAPD124-Assignment2
+//  Description:    This is the detailed UI View Controller of the selected task
 //
-//  Created by Shelalaine Chan on 2017-02-07.
+//  Created by:     Shelalaine Chan
+//  Student ID:     300924281
+//  Change History: 2017-02-07, Created
+//                  2017-02-21,
+//
 //  Copyright © 2017 ShelalaineChan. All rights reserved.
 //
 
@@ -18,17 +23,11 @@ class EditViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     
     let NOTES_PLACEHOLDER_TEXTVIEW = "Enter note / description of the task"
     let TASK_PLACEHOLDER_TEXTVIEW = "Enter task name"
-    private var titles: Dictionary<String, String> = [
-        "EditSegue": "Edit Task",
-        "AddSegue": "Add Task"
-    ]
     
     @IBOutlet weak var taskNameTextField: UITextField!
     @IBOutlet weak var taskNoteTextView: UITextView!
     
-    
     var task: Task?
-    var titleLabel: String?
     var delegate: EditViewControllerDelegate?
 
     override func viewDidLoad() {
@@ -38,8 +37,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        self.title = titles[titleLabel!]
-        
+
         // Show the task name
         taskNameTextField.placeholder = TASK_PLACEHOLDER_TEXTVIEW
         if task?.name != "" {
@@ -77,7 +75,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newLength = textView.text.utf16.count + text.utf16.count - range.length
-        print("textView count: \(textView.text.utf16.count) Text count: \(text.utf16.count) Range length: \(range.length)")
         if newLength > 0 {
             // Check if Notes placeholder is shown
             if textView == taskNoteTextView  && textView.text == NOTES_PLACEHOLDER_TEXTVIEW {
@@ -92,7 +89,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
             // Move cursor to start
             textView.selectedRange = NSMakeRange(0, 0)
         }
-        print("New length: \(newLength)")
         return true
     }
     

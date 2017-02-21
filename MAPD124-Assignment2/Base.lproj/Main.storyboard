@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--All tasks-->
+        <!--All Tasks-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MAPD124_Assignment2" customModuleProvider="target" sceneMemberID="viewController">
@@ -25,7 +25,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="77" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OQe-2w-xti">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.1620105681" green="0.059824479129999997" blue="0.28097024199999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Rows" rowHeight="77" id="EFr-sr-9Ia" customClass="TaskTableViewCell" customModule="MAPD124_Assignment2" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="77"/>
@@ -43,14 +43,14 @@
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task name goes here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sct-gY-TRl">
                                                                     <rect key="frame" x="0.0" y="0.0" width="270" height="20"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                                    <nil key="textColor"/>
+                                                                    <color key="textColor" red="0.80000001190000003" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAe-0K-a3j">
                                                                     <rect key="frame" x="0.0" y="20" width="270" height="40"/>
                                                                     <string key="text">Task notes goes here the quick brown fox jumps over the lazy dog are you okay now Shelalaine wajfkaslfkjlakjflkjlTask notes goes here the quick brown fox jumps over the lazy dog are you okay now Shelalaine wajfkaslfkjlakjflkjlTask notes goes here the quick brown fox jumps over the lazy dog are you okay now Shelalaine wajfkaslfkjlakjflkjlTask notes goes here the quick brown fox jumps over the lazy dog are you okay now Shelalaine wajfkaslfkjlakjflkjlTask notes goes here the quick brown fox jumps over the lazy dog are you okay now Shelalaine wajfkaslfkjlakjflkjlTask notes goes here the quick brown fox jumps over the lazy dog are you okay now Shelalaine wajfkaslfkjlakjflkjl</string>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                                    <nil key="textColor"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
@@ -62,14 +62,17 @@
                                                             <rect key="frame" x="275" y="0.0" width="84" height="60"/>
                                                             <subviews>
                                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bBG-Ww-xnZ">
-                                                                    <rect key="frame" x="0.0" y="15" width="51" height="31"/>
+                                                                    <rect key="frame" x="0.0" y="14.5" width="51" height="31"/>
+                                                                    <color key="onTintColor" red="0.80000001190000003" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <connections>
                                                                         <action selector="taskSwitchHandler:" destination="EFr-sr-9Ia" eventType="valueChanged" id="4jB-oV-afZ"/>
                                                                     </connections>
                                                                 </switch>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZEk-gd-l4S">
                                                                     <rect key="frame" x="54" y="15" width="30" height="30"/>
-                                                                    <state key="normal" title="Edit"/>
+                                                                    <state key="normal" title="Edit">
+                                                                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </state>
                                                                     <connections>
                                                                         <segue destination="A43-DZ-U7z" kind="show" identifier="EditSegue" id="Gzk-Pe-yL0"/>
                                                                     </connections>
@@ -89,6 +92,7 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="uhN-pn-FfU" secondAttribute="trailing" id="q8U-Fj-2hf"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.1620105681" green="0.059824479129999997" blue="0.28097024199999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="completedSwitch" destination="bBG-Ww-xnZ" id="w3G-ge-WSh"/>
                                             <outlet property="editButton" destination="ZEk-gd-l4S" id="Ff7-9E-LpO"/>
@@ -102,7 +106,6 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="OQe-2w-xti" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="5B6-dY-Njf"/>
                             <constraint firstItem="OQe-2w-xti" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="K9H-gT-WeL"/>
@@ -110,8 +113,8 @@
                             <constraint firstAttribute="trailing" secondItem="OQe-2w-xti" secondAttribute="trailing" id="gvV-ZN-cS1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="All tasks" id="1B4-e1-ccx">
-                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="add" id="ovi-Rf-Uki">
+                    <navigationItem key="navigationItem" title="All Tasks" id="1B4-e1-ccx">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ovi-Rf-Uki">
                             <connections>
                                 <segue destination="A43-DZ-U7z" kind="show" identifier="AddSegue" id="jYM-K5-Ytp"/>
                             </connections>
@@ -126,10 +129,10 @@
             </objects>
             <point key="canvasLocation" x="1074.375" y="138.38028169014083"/>
         </scene>
-        <!--Edit Task-->
+        <!--Details-->
         <scene sceneID="nps-4W-tbc">
             <objects>
-                <viewController title="Edit Task" id="A43-DZ-U7z" customClass="EditViewController" customModule="MAPD124_Assignment2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Details" id="A43-DZ-U7z" customClass="EditViewController" customModule="MAPD124_Assignment2" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vlt-tw-1DO"/>
                         <viewControllerLayoutGuide type="bottom" id="fHH-kW-NCb"/>
@@ -147,7 +150,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ylR-4j-98R">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="xFg-69-W3F">
@@ -164,7 +167,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31K-Kh-zf1">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ftd-hx-zvJ">
@@ -180,23 +183,32 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0y-n3-GwR">
                                                 <rect key="frame" x="0.0" y="0.0" width="101" height="30"/>
-                                                <state key="normal" title="Delete"/>
+                                                <color key="backgroundColor" red="0.80000001190000003" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="Delete">
+                                                    <color key="titleColor" red="0.50196081400000003" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="deleteButtonHandler:" destination="A43-DZ-U7z" eventType="touchUpInside" id="3ZP-sO-yJy"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CAt-2K-cBW">
                                                 <rect key="frame" x="121" y="0.0" width="101" height="30"/>
-                                                <state key="normal" title="Cancel"/>
+                                                <color key="backgroundColor" red="0.80000001190000003" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal" title="Cancel">
+                                                    <color key="titleColor" red="0.50196081400000003" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="cancelButtonHandler:" destination="A43-DZ-U7z" eventType="touchUpInside" id="WiN-81-UXM"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B4I-od-hw2">
                                                 <rect key="frame" x="242" y="0.0" width="101" height="30"/>
-                                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="0.80000001190000003" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="Update">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleColor" red="0.50196081400000003" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="updateButtonHandler:" destination="A43-DZ-U7z" eventType="touchUpInside" id="Pvz-IV-e63"/>
@@ -207,7 +219,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.16201056808410527" green="0.05982447912643233" blue="0.28097024204244037" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="fHH-kW-NCb" firstAttribute="top" secondItem="vrP-yk-iPc" secondAttribute="bottom" constant="249" id="S9e-pH-dPF"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vrP-yk-iPc" secondAttribute="trailing" id="bcv-S7-Iko"/>
