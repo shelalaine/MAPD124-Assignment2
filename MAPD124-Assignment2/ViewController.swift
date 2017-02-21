@@ -6,6 +6,9 @@
 //  Created by:     Shelalaine Chan 
 //  Student ID:     300924281
 //  Change History: 2017-01-31, Created
+//                  2017-02-20, Added SQLite3 storage support
+//                              Implemented SettingCellDelegate and EditViewControllerDelegate
+//                              Bug fixes
 //
 //  Copyright © 2017 ShelalaineChan. All rights reserved.
 //
@@ -19,8 +22,8 @@ class ViewController: UIViewController,
     
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var addUIBarButton: UIBarButtonItem!
-    var taskIndex: Int?
     
+    var taskIndex: Int?
     var tasks = [Task]()
 
     override func viewDidLoad() {
@@ -51,6 +54,7 @@ class ViewController: UIViewController,
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        // Refresh the tasks table to ensure that latest changes are applied
         self.table.reloadData()
     }
 
@@ -60,6 +64,8 @@ class ViewController: UIViewController,
         updateTaskLabels(cell, indexPath.row)
         cell.completedSwitch.setOn(tasks[indexPath.row].onGoing, animated: false)
         cell.editButton.tag = indexPath.row
+        
+        // Set the delegate to this Main View Controller
         cell.cellDelegate = self
         return cell;
     }
@@ -119,6 +125,7 @@ class ViewController: UIViewController,
         table.deleteRows(at: [indexPath], with: .fade)
     }
     
+    // MARK: Delegate Protocol of EditViewControllers
     func saveItem(controller: EditViewController, _ task: Task) {
         tasks[taskIndex!] = task
         updateTaskInDB(task: tasks[taskIndex!])
@@ -130,6 +137,7 @@ class ViewController: UIViewController,
         tasks.remove(at: taskIndex!)
     }
     
+    // MARK: Delegate Protocol of EditViewControllers
     func didChangeSwitchState(sender: TaskTableViewCell, isOn: Bool) {
         if let indexPath = self.table.indexPath(for: sender) {
             tasks[indexPath.row].onGoing = isOn
@@ -139,11 +147,13 @@ class ViewController: UIViewController,
         }
     }
     
+    // Update the task name and notes labels
     private func updateTaskLabels(_ cell: TaskTableViewCell, _ row: Int) {
         
-//        cell.editButton.setTitleColor(UIColor.grayColor(), forState: .Disabled)
+        // Set the color to light gray if the UISwitch is disabled
         cell.editButton.setTitleColor(UIColor.lightGray, for: .disabled)
 
+        // Customize the task name and notes text appearance based on its status
         if tasks[row].onGoing {
             cell.taskLabel.text = tasks[row].name
             cell.subTaskLabel.text = tasks[row].notes
@@ -160,7 +170,6 @@ class ViewController: UIViewController,
     }
 
     // MARK: SQLite Handlers
-    
     func dataFilePath() -> String {
         let urls = FileManager.default.urls(for:
             .documentDirectory, in: .userDomainMask)
@@ -215,6 +224,9 @@ class ViewController: UIViewController,
             print("Failed to open database")
         } else {
             var statement:OpaquePointer? = nil
+            // Note: When inserting rows to the table, there is no need to specify the task ID
+            //          since the ID is setup to AUTOINCREMENT when the Task table was created.
+            //          This is the reason why the ID is not included here
             let update = "INSERT INTO FIELDS (TASK_DATA, TASK_NOTE, ONGOING) VALUES (?, ?, ?);"
             
             if sqlite3_prepare_v2(database, update, -1, &statement, nil) == SQLITE_OK {

@@ -6,7 +6,8 @@
 //  Created by:     Shelalaine Chan
 //  Student ID:     300924281
 //  Change History: 2017-02-07, Created
-//                  2017-02-21,
+//                  2017-02-21, Added Update, Cancel, and Delete Action button handlers
+//                              Enhanced the Notes TextView appearance
 //
 //  Copyright © 2017 ShelalaineChan. All rights reserved.
 //

@@ -6,6 +6,7 @@
 //  Created by:     Shelalaine Chan
 //  Student ID:     300924281
 //  Change History: 2017-02-07, Created
+//                  2017-02-20, Added unique identifier
 //
 //  Copyright © 2017 ShelalaineChan. All rights reserved.
 //
